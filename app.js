@@ -15,6 +15,9 @@ const path = require('path');
 
 const config = require('./config');
 const indexroutes = require('./routes/index');
+const usersRouter = require('./routes/usersRouter');
+const signRouter = require('./routes/signRouter');
+
 
 const port = process.env.PORT || config.port
 
@@ -35,7 +38,10 @@ app.use(bodyparser())
   }))
   .use(indexroutes.routes())
   .use(indexroutes.allowedMethods())
-
+  .use(usersRouter.routes())
+  .use(usersRouter.allowedMethods())
+  .use(signRouter.routes())
+  .use(signRouter.allowedMethods())
 // logger
 app.use(async (ctx, next) => {
   const start = new Date()
