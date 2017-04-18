@@ -12,6 +12,7 @@ const topClient = require("../scripts/topClient").TopClient;
 exports.login = async (ctx,next) =>{
 
   await next();
+  console.log(ctx.request.body);
   const reqData = JSON.parse(ctx.request.body);
 
   client.startTransaction();
