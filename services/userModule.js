@@ -86,7 +86,7 @@ exports.forgotPw = async (ctx,next) => {
 /**
  *获取验证码
  */
-exports.getIdentifyingCode = async (ctx,next) => {
+exports.getIdentifyCode = async (ctx,next) => {
   await next();
   let idCode = "";
   const reqData = ctx.request.body;
