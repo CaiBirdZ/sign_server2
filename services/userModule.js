@@ -10,21 +10,20 @@ const topClient = require("../scripts/topClient").TopClient;
  *登陆
  */
 exports.login = async (ctx,next) =>{
-
   await next();
   console.log(ctx.request.body);
-  const reqData = JSON.parse(ctx.request.body);
+  const reqData = ctx.request.body;
 
   client.startTransaction();
   let userInfo = await client.executeTransaction("select * from user_info,company_data where jobNo = ? and user_info.cpID = company_data.cpID;",[reqData.jobNo]);
   client.stopTransaction();
 
   if(userInfo[0]=={}||userInfo[0]==null){
-      return ctx.response.body = JSON.stringify({code:'003'});
+      return ctx.response.body = {code:'003'};
   }else if(userInfo[0].password === reqData.password){
-      return ctx.response.body = JSON.stringify({code:'000',result:userInfo});
+      return ctx.response.body = {code:'000',result:userInfo};
   }else{
-      return ctx.response.body = JSON.stringify({code:'002'});
+      return ctx.response.body = {code:'002'};
   }
 };
 
@@ -34,16 +33,16 @@ exports.login = async (ctx,next) =>{
  */
 exports.changePw = async (ctx,next) => {
   await next();
-  const reqData = JSON.parse(ctx.request.body);
+  const reqData = ctx.request.body;
   client.startTransaction();
   const result = await client.executeTransaction("update user_info set password=? where emTel=?", [reqData.newPassword,reqData.emTel]);
   client.stopTransaction();
 
   console.log(result);
   if(result[0]!=null||result[0]!={}){
-    return ctx.response.body = JSON.stringify({code:'000'});
+    return ctx.response.body = {code:'000'};
   }else{
-    return ctx.response.body = JSON.stringify({code:'003'});
+    return ctx.response.body = {code:'003'};
   }
 }
 
@@ -52,7 +51,7 @@ exports.changePw = async (ctx,next) => {
  */
 exports.forgotPw = async (ctx,next) => {
   await next();
-  const reqData = JSON.parse(ctx.request.body);
+  const reqData = ctx.request.body;
 
   client.startTransaction();
   const result = await client.executeTransaction("update user_info set password='123456' where emTel=?", [reqData.emTel]);
@@ -62,7 +61,7 @@ exports.forgotPw = async (ctx,next) => {
   if(result[0]!=null||result[0]!={}){
     return ctx.response.body = JSON.stringify({code:'000'});
   }else{
-    return ctx.response.body = JSON.stringify({code:'003'});
+    return ctx.response.body = {code:'003'};
   }
 }
 
@@ -71,10 +70,10 @@ exports.forgotPw = async (ctx,next) => {
  */
 exports.getIdentifyingCode = async (ctx,next) => {
   await next();
-  var idCode = "";
-  const reqData = JSON.parse(ctx.request.body);
+  let idCode = "";
+  const reqData = ctx.request.body;
 
-  for(var i = 0;i<4;i++){
+  for(let i = 0;i<4;i++){
     idCode += Math.floor(Math.random()*10);
   }
 
@@ -94,11 +93,11 @@ exports.getIdentifyingCode = async (ctx,next) => {
     function (error,response) {
       if(!error){
         console.log(response);
-        return ctx.response.body = JSON.stringify({okCode:"1",messageCode:idCode});
+        return ctx.response.body = {okCode:"1",messageCode:idCode};
       }
       else{
         console.log(error);
-        return ctx.response.body = JSON.stringify({errCode:"1"});
+        return ctx.response.body = {errCode:"1"};
       }
 
     });
@@ -109,7 +108,7 @@ exports.getIdentifyingCode = async (ctx,next) => {
  */
 exports.modifyInfo = async (ctx,next) => {
   await next();
-  const reqData = JSON.parse(ctx.request.body);
+  const reqData = ctx.request.body;
 
   client.startTransaction();
   const result = await client.executeTransaction("update user_info set jobNo=?,emName=?,department=?,emTel=?,email=? where jobNo = ?;",
@@ -118,9 +117,9 @@ exports.modifyInfo = async (ctx,next) => {
 
   console.log(result);
   if(result[0]!=null||result[0]!={}){
-    return ctx.response.body = JSON.stringify({code:'000'});
+    return ctx.response.body = {code:'000'};
   }else{
-    return ctx.response.body = JSON.stringify({code:'003'});
+    return ctx.response.body = {code:'003'};
   }
 }
 

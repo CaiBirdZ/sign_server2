@@ -1,0 +1,34 @@
+//
+   Created by 11952 on 2017/4/5.
+
+extends layout
+block content
+    div#contentRight
+        table#modifyTable
+            tr
+                td='员工号'
+                td='姓名'
+                td='部门'
+                td='日期'
+                td='签到时间'
+                td='签出时间'
+                td='修改后签到时间'
+                td='修改后签出时间'
+                td='同意修改'
+            each data in result
+                tr
+                    td=data.jobNo
+                    td=data.emName
+                    td=data.department
+                    td=data.signDate
+                    td=data.signTime
+                    td=data.signOut
+                    td=data.afterTime
+                    td=data.afterOut
+                    td
+                        input(type='button',value='确认')
+            //each data in result
+            //    tr.queryAll.displayCtrl
+            //        td=data.cpID
+            //        td=data.cpName
+            //        td=data.cpHQ

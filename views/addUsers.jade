@@ -1,0 +1,24 @@
+//
+   Created by 11952 on 2017/4/5.
+
+extends layout
+block content
+    div#contentRight
+        div.Rect(style='margin:5% 0 0 30%')
+            div
+                span.tipText 员工号
+                input.usedInput#jobNo(type="text")
+            div
+                span.tipText 姓名
+                input.usedInput#emName(type='text',style='margin-left: 8%;')
+            div
+                span.tipText 部门
+                input.usedInput#department(type='text',style='margin-left: 8%;')
+            div
+                span.tipText 手机号码
+                input.usedInput#emTel(type='text',style='margin-left: 2%;')
+            div
+                span.tipText E-mail
+                input.usedInput#email(type='text')
+            div
+                button.usedButton(onclick='add()') 添加

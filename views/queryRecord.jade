@@ -1,0 +1,29 @@
+//
+   Created by 11952 on 2017/4/5.
+
+extends layout
+block content
+
+    div#contentRight
+        div#option
+            span.tipText='员工号'
+            input.useInput#jobNo(type='text')
+            button.usedSmallButton(style='margin : 2% 0 0 0;font-size:0.8em',onclick='byJobNo()') 按员工号查询
+            span.tipText(style='margin-left:5%')='部门'
+            input.useInput#department(type='text')
+            button.usedSmallButton(style='margin : 2% 0 0 0;font-size:0.8em',onclick='byDepartment()') 按部门查询
+            div
+                span.tipText='日期'
+                input.useInput#signDate(type='text',placeholder='格式为2017/04/01',style='margin : 2% 0 0 0;font-size:0.8em')
+                button.usedSmallButton(style='margin : 2% 0 0 0;font-size:0.8em',onclick='bySignDate()') 按日期查询
+                button.usedSmallButton(style='margin : 2% 0 0 5%;font-size:0.8em',onclick='byJobNoAndSignDate()') 按员工号|日期查询
+                button.usedSmallButton(style='margin : 2% 0 0 5%;font-size:0.8em',onclick='byDepartmentAndSignDate()') 按部门|日期查询
+        table
+            tr
+                td='员工号'
+                td='姓名'
+                td='部门'
+                td='日期'
+                td='签到时间'
+                td='签出时间'
+        input(type='button',value='导出',onclick='').displayCtrl#modify

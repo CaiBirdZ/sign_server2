@@ -5,7 +5,7 @@
 
 const router = require('koa-router')();
 
-router.post('/',async (ctx,next) =>{
+router.get('/',async (ctx,next) =>{
   await next();
   ctx.render('index',{title:'hello world'});
 });

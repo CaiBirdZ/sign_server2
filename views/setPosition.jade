@@ -1,0 +1,11 @@
+extends layout
+block content
+    div#contentRight
+        div#posOption
+            span 请选择公司或子公司：
+            select.usedSelect
+                each data in result
+                    option=data.cpName
+            span                 (提示：请左键单击想要设置的位置！)
+        div#allmap
+            script(type="text/javascript",src='/javascripts/setPosition.js')

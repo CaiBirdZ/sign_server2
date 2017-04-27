@@ -1,7 +1,61 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/css/style.css')
-  body
+    head
+        //title= title
+        meta(http-equiv="X-UA-Compatible",content="IE=edge,chrome=1")
+        meta(name="viewport",content="width=device-width,initial-scale=1.0,user-scalable=no")
+        meta(http-equiv="Content-Type",content="text/html; charset=utf-8")
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href='/stylesheets/default.css')
+        link(rel='stylesheet', href='/stylesheets/app.css')
+        script(type="text/javascript",src="http://webapi.amap.com/maps?v=1.3&key=ca8924ebf5f9542b6b4c1e0d9ba543f7")
+        script(src='/javascripts/jquery-3.1.1.js')
+        script(src='/javascripts/app.js')
+        script(src='/javascripts/jquery.ssd-vertical-navigation.js')
+        script(src='/javascripts/index.js')
+        script(src='/javascripts/queryRecord.js')
+        script(src='/javascripts/addUsers.js')
+    body
+        div#contentWrapper
+
+            div#contentLeft
+
+                ul#leftNavigation
+                    li.active
+                        a(href="#") 信息维护
+                            i.fa.fa-coffee.leftNavIcon
+                        ul
+                            li
+                                a(onclick='getData()') 设置公司信息
+                                    i.fa.fa-angle-right.leftNavIcon
+                            li
+                                a(onclick='setPosHref()') 设置公司位置
+                                    i.fa.fa-angle-right.leftNavIcon
+                    li
+                        a(href="#") 查看记录
+                            i.fa.fa-flask.leftNavIcon
+
+                        ul
+                            li
+                                a(href="http://118.89.233.175:80/queryRecord") 签到记录
+                                    i.fa.fa-angle-right.leftNavIcon
+                            li
+                                a(href="http://118.89.233.175:80/exceptionQuery") 异常记录
+                                    i.fa.fa-angle-right.leftNavIcon
+                            li
+                                a(href="http://118.89.233.175:80/modifyConfirm") 修改记录
+                                    i.fa.fa-angle-right.leftNavIcon
+
+                    li
+                        a(href="#") 添加用户
+                            i.fa.fa-truck.leftNavIcon
+
+                        ul
+                            li
+                                a(href="http://118.89.233.175:80/addUsers") 添加员工
+                                    i.fa.fa-angle-right.leftNavIcon
+                    li.clickable
+                        a(href="#") 联系我们
+                            i.fa.fa-envelope-o.leftNavIcon
     block content
+

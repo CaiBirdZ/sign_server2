@@ -1,5 +1,24 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+doctype html
+html
+    head
+        title=title
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        script(src='/javascripts/jquery-3.1.1.js')
+        script(src='/javascripts/loginController.js')
+    body
+        block content
+            div#logo
+            div#loginRect
+                div.userInput
+                    div.loginLogo
+                    input#userNo(type="text")
+                div.pwInput
+                    div.pwLogo
+                    input#password(type='password')
+                div.pwInput.textHref
+                    a.textHref(href='http://118.89.233.175:80/changePassword',style="float:left") 修改密码
+                    a.textHref(href='http://118.89.233.175:80/forgotPassword',style="float:right;margin-right:5%") 忘记密码
+                div.buttonDiv
+                    div#signIn(onclick='signIn()') 登陆
+                    a(href='http://118.89.233.175:80/register',style="text-decoration:none;color:white")
+                        div#Register 注册
