@@ -9,7 +9,7 @@ exports.client = new Client({
     port: 3306,
     database: "sign_data",
     user: "root",
-    password: "root"
+    password: "chuang521"
   }
 });
 console.log(exports.client);
