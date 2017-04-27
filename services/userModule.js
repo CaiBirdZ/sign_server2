@@ -9,13 +9,13 @@ const topClient = require("../scripts/topClient").TopClient;
 /**
  *登陆
  */
-exports.login = async (ctx,next) =>{
+exports.loginByJobNo = async (ctx,next) =>{
   await next();
   console.log(ctx.request.body);
   const reqData = ctx.request.body;
 
   client.startTransaction();
-  let userInfo = await client.executeTransaction("select * from user_info,company_data where jobNo = ? and user_info.cpID = company_data.cpID;",[reqData.jobNo]);
+  let userInfo = await client.executeTransaction("select * from user_info,company_data where jobNo = ?",[reqData.userNo]);
   client.stopTransaction();
 
   if(userInfo[0]=={}||userInfo[0]==null){
@@ -24,6 +24,24 @@ exports.login = async (ctx,next) =>{
       return ctx.response.body = {code:'000',result:userInfo};
   }else{
       return ctx.response.body = {code:'002'};
+  }
+};
+
+exports.loginByTel = async (ctx,next) =>{
+  await next();
+  console.log(ctx.request.body);
+  const reqData = ctx.request.body;
+
+  client.startTransaction();
+  let userInfo = await client.executeTransaction("select * from user_info,company_data where emTel = ?",[reqData.emTel]);
+  client.stopTransaction();
+
+  if(userInfo[0]=={}||userInfo[0]==null){
+    return ctx.response.body = {code:'003'};
+  }else if(userInfo[0].password === reqData.password){
+    return ctx.response.body = {code:'000',result:userInfo};
+  }else{
+    return ctx.response.body = {code:'002'};
   }
 };
 
