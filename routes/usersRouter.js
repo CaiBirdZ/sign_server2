@@ -11,7 +11,7 @@ const userModule = require('../services/userModule');
 router.post('/users/loginByJobNo',userModule.loginByJobNo);
 router.post('/users/loginByTel',userModule.loginByTel);
 //获取验证码
-router.post('/users/getIdentifyCode',userModule.getIdentifyingCode);
+router.post('/users/getIdentifyCode',userModule.getIdentifyCode);
 //修改密码
 router.post('/users/changePw',userModule.changePw);
 //找回密码
