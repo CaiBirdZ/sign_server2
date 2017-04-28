@@ -47,9 +47,11 @@ exports.getCode = async (ctx,next) => {
       else{
         console.log(error);
         return ctx.response.body = {errCode:"1"};
-      }
 
+      }
+      ctx.end();
     });
+
 }
 
 
