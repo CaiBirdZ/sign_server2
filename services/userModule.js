@@ -6,6 +6,53 @@ const client = require('../config/my-connection').client;
 const url = require('url');
 const topClient = require("../scripts/topClient").TopClient;
 
+
+/**
+ *获取验证码
+ */
+exports.getIdentifyCode = async (ctx,next) => {
+  await next();
+  let idCode = "";
+  const reqData = ctx.request.body;
+
+  client.startTransaction();
+  let user = await client.executeTransaction("select * from user_info,company_data where jobNo = ?",[reqData.userNo]);
+  client.stopTransaction();
+  if(user==[]){
+    return ctx.response.body = {noUser:"1"};
+  }
+
+  for(let i = 0;i<4;i++){
+    idCode += Math.floor(Math.random()*10);
+  }
+
+  let client = new topClient({
+    'appkey':'23662936',
+    'appsecret':'dfee5c7cc4c12137b2860ddf4cd59e3d',
+    'REST_URL':'http://gw.api.taobao.com/router/rest'
+  });
+  client.execute('alibaba.aliqin.fc.sms.num.send',
+    {
+      'sms_type':'normal',
+      'sms_free_sign_name':'爱签',
+      'sms_param':'{\"emName\":\"张闯\",\"number\":'+'\"'+idCode+'\"'+'}',
+      'rec_num':reqData.emTel,
+      'sms_template_code':'SMS_53530126'
+    },
+    function (error,response) {
+      if(!error){
+        console.log(response);
+        return ctx.response.body = {okCode:"1",messageCode:idCode};
+      }
+      else{
+        console.log(error);
+        return ctx.response.body = {errCode:"1"};
+      }
+
+    });
+}
+
+
 /**
  *登陆
  */
@@ -83,43 +130,6 @@ exports.forgotPw = async (ctx,next) => {
   }
 }
 
-/**
- *获取验证码
- */
-exports.getIdentifyCode = async (ctx,next) => {
-  await next();
-  let idCode = "";
-  const reqData = ctx.request.body;
-
-  for(let i = 0;i<4;i++){
-    idCode += Math.floor(Math.random()*10);
-  }
-
-  let client = new topClient({
-    'appkey':'23662936',
-    'appsecret':'dfee5c7cc4c12137b2860ddf4cd59e3d',
-    'REST_URL':'http://gw.api.taobao.com/router/rest'
-  });
-  client.execute('alibaba.aliqin.fc.sms.num.send',
-    {
-      'sms_type':'normal',
-      'sms_free_sign_name':'爱签',
-      'sms_param':'{\"emName\":\"张闯\",\"number\":'+'\"'+idCode+'\"'+'}',
-      'rec_num':reqData.emTel,
-      'sms_template_code':'SMS_53530126'
-    },
-    function (error,response) {
-      if(!error){
-        console.log(response);
-        return ctx.response.body = {okCode:"1",messageCode:idCode};
-      }
-      else{
-        console.log(error);
-        return ctx.response.body = {errCode:"1"};
-      }
-
-    });
-}
 
 /**
  *修改个人信息
