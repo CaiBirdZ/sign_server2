@@ -18,6 +18,7 @@ router.post('/users/forgotPw',userModule.forgotPw);
 //修改个人信息
 router.post('/users/modifyInfo',userModule.modifyInfo);
 //获取验证码
-router.post('/users/getIdentifyCode',userModule.getIdentifyCode);
+router.post('/users/getCode',userModule.getCode);
+
 
 module.exports=router;

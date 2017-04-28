@@ -10,7 +10,7 @@ const topClient = require("../scripts/topClient").TopClient;
 /**
  *获取验证码
  */
-exports.getIdentifyCode = async (ctx,next) => {
+exports.getCode = async (ctx,next) => {
   await next();
   let idCode = "";
   const reqData = ctx.request.body;
