@@ -119,7 +119,7 @@ exports.getIdentifyCode = async (ctx,next) => {
       }
 
     });
-};
+}
 
 /**
  *修改个人信息

@@ -65,6 +65,6 @@ app.on('error', function(err, ctx) {
   logger.error('server error', err, ctx)
 })
 
-module.exports = app.listen(config.port, () => {
-  console.log(`Listening on http://localhost:${config.port}`)
+module.exports = app.listen(port, () => {
+  console.log(`Listening on http://localhost:${port}`)
 })
