@@ -26,12 +26,12 @@ exports.getIdentifyCode = async (ctx,next) => {
     idCode += Math.floor(Math.random()*10);
   }
 
-  let client = new topClient({
+  let topclient = new topClient({
     'appkey':'23662936',
     'appsecret':'dfee5c7cc4c12137b2860ddf4cd59e3d',
     'REST_URL':'http://gw.api.taobao.com/router/rest'
   });
-  client.execute('alibaba.aliqin.fc.sms.num.send',
+  topclient.execute('alibaba.aliqin.fc.sms.num.send',
     {
       'sms_type':'normal',
       'sms_free_sign_name':'爱签',
