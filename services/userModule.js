@@ -49,9 +49,9 @@ exports.getCode = async (ctx,next) => {
         return ctx.response.body = {errCode:"1"};
 
       }
-      ctx.end();
-    });
 
+    });
+  ctx.end();
 }
 
 
